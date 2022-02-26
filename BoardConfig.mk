@@ -138,6 +138,10 @@ BOARD_USES_METADATA_PARTITION := true
 # QCOM Decryption
 BOARD_USES_QCOM_FBE_DECRYPTION := true
 
+# Partitions (listed in the file) to be wiped under recovery.
+TARGET_RECOVERY_WIPE := $(DEVICE_PATH)/recovery.wipe
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
+
 # Recovery
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 
@@ -156,16 +160,22 @@ PLATFORM_VERSION := 16.1.0
 # Use mke2fs to create ext4 images
 TARGET_USES_MKE2FS := true
 
+TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
+
 # TWRP Flags
 TW_THEME := portrait_hdpi
-TW_EXTRA_LANGUAGES := true
+ECOVERY_SDCARD_ON_DATA := true
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
+TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
+TW_MAX_BRIGHTNESS := 511
+TW_DEFAULT_BRIGHTNESS := 130
+TW_Y_OFFSET := 90
+TW_H_OFFSET := -90
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
-TW_USE_LEDS_HAPTICS := true
+TW_HAPTICS_TSPDRV := true
 TW_EXCLUDE_TWRPAPP := true
 TW_HAS_EDL_MODE := true
-TW_MAX_BRIGHTNESS := 1023
-TW_DEFAULT_BRIGHTNESS := 420
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
